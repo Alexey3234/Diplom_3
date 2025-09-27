@@ -38,12 +38,12 @@ class OrderLocators:
     MODAL_TEXT = (By.XPATH, "//div[contains(@class, 'Modal_modal__')]//p")
     MODAL_IMAGE = (By.XPATH, "//div[contains(@class, 'Modal_modal__')]//img")
     MODAL_OVERLAY = (By.XPATH, "//div[contains(@class, 'Modal_modal_overlay__')]")
-    
-    # Лента заказов
+        # Лента заказов
     ORDER_FEED_SECTION = (By.XPATH, "//h1[text()='Лента заказов']")
     ALL_ORDERS_LIST = (By.XPATH, "//div[contains(@class, 'OrderHistory_orderList__')]")
+    ALL_ORDER_ITEMS = (By.XPATH, "//div[contains(@class, 'OrderHistory_list')]//li | //ul[contains(@class, 'OrderFeed_orderList')]//li")
+    ORDER_ITEMS = (By.CSS_SELECTOR, "[class*='OrderHistory_list'] li, [class*='OrderFeed_orderList'] li")
     
-    # Сообщения об ошибках
     ERROR_MESSAGE = (By.XPATH, "//p[contains(@class, 'error') or contains(@class, 'message')]")
     # Раздел "В работе"
     ORDERS_IN_PROGRESS_SECTION = (By.XPATH, "//*[contains(text(), 'В работе')]")

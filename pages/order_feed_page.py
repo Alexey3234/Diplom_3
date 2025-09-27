@@ -1,11 +1,12 @@
 import sys
 import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-
 import allure
+import re
+sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
 from pages.base_page import BasePage
 from locators.order_feed_locators import OrderFeedLocators
-import re
+from pages.main_page import MainPage
+
 
 class OrderFeedPage(BasePage):
     def __init__(self, driver):
@@ -14,9 +15,7 @@ class OrderFeedPage(BasePage):
     
     @allure.step("Перейти на страницу ленты заказов")
     def navigate(self):
-        from pages.main_page import MainPage
         MainPage(self.driver).click_order_feed()
-        return self
     
     @allure.step("Ожидать загрузки ленты заказов")
     def wait_for_order_feed_loaded(self, timeout=10):
@@ -61,17 +60,12 @@ class OrderFeedPage(BasePage):
     
     @allure.step("Проверить наличие заказов в ленте")
     def has_any_orders(self):
-        return len(self.find_elements(self.locators.ORDER_ITEMS)) > 0
+        return self.get_elements_count(self.locators.ORDER_ITEMS) > 0
     
     @allure.step("Проверить наличие заказов в работе")
     def has_orders_in_progress(self):
-        return len(self.find_elements(self.locators.ORDERS_IN_PROGRESS_ITEMS)) > 0
+        return self.get_elements_count(self.locators.ORDERS_IN_PROGRESS_ITEMS) > 0
     
-    @allure.step("Получить исходный код страницы")
-    def get_page_source(self):
-        return self.driver.page_source
-
     @allure.step("Получить заголовок страницы")
     def get_title(self):
-        return self.driver.title
-    
+        return self.get_current_page_title()
